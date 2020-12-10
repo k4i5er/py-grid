@@ -2,10 +2,22 @@ from tkinter import Tk, LEFT, RIGHT, IntVar, BooleanVar, StringVar
 from tkinter.ttk import Frame, Label, Entry, Button, Combobox, Radiobutton, Checkbutton
 
 
-class User():
-  # Atributos
+# class User():
+#   # Atributos
 
-  # Métodos
+#   # Métodos
+
+def save_record():
+    if fb.get():
+        # Deselecciona el Radiobutton
+        rb_fb.state(['!selected'])
+
+    else:
+        # Deselecciona el Radiobutton
+        rb_noFb.state(['!selected'])
+    if chk_v1.get():
+        # Deselecciona el Checkbutton
+        chk_v1.set(0)
 
 
 def show_fb():
@@ -27,7 +39,7 @@ def show_value():
 
 
 root = Tk()
-root.geometry('350x300')
+root.geometry('350x1080')
 Label(root, text='Nombre').grid(row=0, column=0)
 Entry(root).grid(row=0, column=1)
 Label(root, text='Apellidos').grid(row=1, column=0)
@@ -36,10 +48,12 @@ Label(root, text='Correo electrónico').grid(row=2, column=0)
 Entry(root).grid(row=2, column=1)
 Label(root, text='¿Cuentas con Facebook?').grid(row=3, column=0)
 fb = BooleanVar()
-Radiobutton(root, text='Sí', variable=fb, value=True,
-            command=show_fb).grid(row=3, column=1)
-Radiobutton(root, text='No', variable=fb, value=False,
-            command=show_fb).grid(row=3, column=2)
+rb_fb = Radiobutton(root, text='Sí', variable=fb, value=True,
+                    command=show_fb)
+rb_fb.grid(row=3, column=1)
+rb_noFb = Radiobutton(root, text='No', variable=fb, value=False,
+                      command=show_fb)
+rb_noFb.grid(row=3, column=2)
 lbl_fb_user = Label(root, text='Usuario de Facebook')
 entry_fb_user = Entry(root)
 Label(root, text='Otras redes sociales que tengas (Selecciona todas las que apliquen)').grid(
@@ -53,6 +67,6 @@ Checkbutton(root, text='Instagram', variable=chk_v2,
             command=show_value).grid(row=7, column=0)
 Checkbutton(root, text='Tik Tok', variable=chk_v3,
             command=show_value).grid(row=8, column=0)
-btn_x = Button(root, text='Guardar registro')
+btn_x = Button(root, text='Guardar registro', command=save_record)
 btn_x.grid(row=9, column=0, columnspan=3)
 root.mainloop()
